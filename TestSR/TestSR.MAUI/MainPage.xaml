@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:local="clr-namespace:TestSR.MAUI"
+             x:Class="TestSR.MAUI.MainPage"
+             x:DataType="local:MainVM">
+
+
+
+    <Grid RowDefinitions="*, auto">
+        <CollectionView ItemsSource="{Binding Messages}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="x:String">
+                    <Label Text="{Binding }" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Label IsVisible="{Binding RetryContext, Converter={toolkit:IsNullConverter}}"
+                Grid.Row="1"
+               Text="{Binding CurrentTime}" />
+        <HorizontalStackLayout IsVisible="{Binding RetryContext, Converter={toolkit:IsNotNullConverter}}"
+                               Spacing="5"
+                               Grid.Row="1">
+            <Label Text="{Binding CurrentTime}" />
+            <Label Text="{Binding TimeSinceDisconnection}" />
+            <Label Text="{Binding NoOfRetryes}" />
+            <Label Text="{Binding Reason}" />
+
+
+        </HorizontalStackLayout>
+        
+    </Grid>
+
+
+
+</ContentPage>
